@@ -13,7 +13,7 @@ WORKDIR /src
 COPY ["ScheduleService.csproj", "./"]
 RUN dotnet restore "/ScheduleService.csproj"
 COPY . .
-WORKDIR "/src/ScheduleService"
+WORKDIR "/src"
 RUN dotnet build "ScheduleService.csproj" -c Release -o /app/build
 
 FROM build AS publish
