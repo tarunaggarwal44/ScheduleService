@@ -11,7 +11,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["ScheduleService.csproj", "./"]
-RUN dotnet restore "/ScheduleService.csproj"
+RUN dotnet restore "./ScheduleService.csproj"
 COPY . .
 RUN dotnet build "ScheduleService.csproj" -c Release -o /app/build
 
