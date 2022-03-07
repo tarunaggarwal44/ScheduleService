@@ -1,25 +1,27 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM microsoft/dotnet 
 
-#Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
-#For more information, please see https://aka.ms/containercompat
+# Set ASPNETCORE_URLS
+ENV ASPNETCORE_URLS=https://*:8080
 
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# Switch to root for changing dir ownership/permissions
+USER 0
 
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
-WORKDIR /src
-COPY ["ScheduleService/ScheduleService.csproj", "ScheduleService/"]
-RUN dotnet restore "ScheduleService/ScheduleService.csproj"
-COPY . .
-WORKDIR "/src/ScheduleService"
-RUN dotnet build "ScheduleService.csproj" -c Release -o /app/build
+# Copy the binaries
+COPY /bin/release/netcoreapp1.1/publish app
 
-FROM build AS publish
-RUN dotnet publish "ScheduleService.csproj" -c Release -o /app/publish
+# Change to app directory
+WORKDIR app
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ScheduleService.dll"]
+# In order to drop the root user, we have to make some directories world
+# writable as OpenShift default security model is to run the container under
+# random UID.
+RUN chown -R 1001:0 /app && chmod -R og+rwx /app
+
+# Expose port 8080 for the application.
+EXPOSE 8080
+
+# Run container by default as user with id 1001 (default)
+USER 1001
+
+# Start the application using dotnet!!!
+ENTRYPOINT dotnet ScheduleService.dll
