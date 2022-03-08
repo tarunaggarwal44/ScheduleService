@@ -12,7 +12,7 @@ namespace ScheduleService
 {
     public class Program
     {
-         /* public static void Main(string[] args)
+         public static void Main(string[] args)
           {
               CreateHostBuilder(args).Build().Run();
           }
@@ -22,23 +22,23 @@ namespace ScheduleService
                   .ConfigureWebHostDefaults(webBuilder =>
                   {
                       webBuilder.UseStartup<Startup>();
-                  });*/
+                  });
 
 
-       public static void Main(string[] args)
-        {
-            var config = new ConfigurationBuilder().AddEnvironmentVariables("Development").Build();
-            var url = config["ASPNETCORE_URLS"] ?? "http://*:53914";
+        /* public static void Main(string[] args)
+          {
+              var config = new ConfigurationBuilder().AddEnvironmentVariables("Development").Build();
+              var url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseUrls(url)
-                .Build();
+              var host = new WebHostBuilder()
+                  .UseKestrel()
+                  .UseContentRoot(Directory.GetCurrentDirectory())
+                  .UseIISIntegration()
+                  .UseStartup<Startup>()
+                  .UseUrls(url)
+                  .Build();
 
-            host.Run();
-        }
+              host.Run();
+          }*/
     }
 }

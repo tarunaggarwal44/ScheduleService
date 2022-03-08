@@ -8,8 +8,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 USER 0
 WORKDIR /app
 RUN chown -R 1001:0 /app && chmod -R og+rwx /app
-EXPOSE 53914
-ENV ASPNETCORE_URLS=https://*:53914
+EXPOSE 8080
+ENV ASPNETCORE_URLS=https://*:8080
 
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
