@@ -27,8 +27,8 @@ namespace ScheduleService
 
        public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder().AddEnvironmentVariables("").Build();
-            var url = config["ASPNETCORE_URLS"] ?? "http://*:6000";
+            var config = new ConfigurationBuilder().AddEnvironmentVariables("Development").Build();
+            var url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
 
             var host = new WebHostBuilder()
                 .UseKestrel()
