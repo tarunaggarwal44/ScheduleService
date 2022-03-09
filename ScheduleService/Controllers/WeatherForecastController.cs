@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace ScheduleService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -23,7 +22,7 @@ namespace ScheduleService.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+    
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
