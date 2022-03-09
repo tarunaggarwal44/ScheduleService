@@ -6,8 +6,8 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 USER 0
-WORKDIR /app
-RUN chown -R 1001:0 /app && chmod -R og+rwx /app
+WORKDIR /ScheduleService
+RUN chown -R 1001:0 /ScheduleService && chmod -R og+rwx /ScheduleService
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
 
@@ -18,12 +18,12 @@ WORKDIR /src
 COPY ["ScheduleService.csproj", "./"]
 RUN dotnet restore "./ScheduleService.csproj"
 COPY . .
-RUN dotnet build "ScheduleService.csproj" -c Release -o /app/build
+RUN dotnet build "ScheduleService.csproj" -c Release -o /ScheduleService/build
 
 FROM build AS publish
-RUN dotnet publish "ScheduleService.csproj" -c Release -o /app/publish
+RUN dotnet publish "ScheduleService.csproj" -c Release -o /ScheduleService/publish
 
 FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+WORKDIR /ScheduleService
+COPY --from=publish /ScheduleService/publish .
 ENTRYPOINT ["dotnet", "ScheduleService.dll"]
