@@ -45,7 +45,7 @@ namespace ScheduleService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-        }
+        });
     }
 }
                              }
