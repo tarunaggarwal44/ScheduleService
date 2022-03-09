@@ -44,10 +44,7 @@ namespace ScheduleService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=WeatherForecast}/{action=Get}/{id?}");
-            });
+                endpoints.MapDefaultControllerRoute();
         }
     }
 }
