@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ScheduleService.Controllers
 {
     [ApiController]
-    [Route("[forecast]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
