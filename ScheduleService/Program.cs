@@ -17,7 +17,7 @@ namespace ScheduleService
     {
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
          .SetBasePath(Directory.GetCurrentDirectory())
-         .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
+         //.AddJsonFile("appSettings.json", optional: false, reloadOnChange: true)
          .AddEnvironmentVariables()
          .Build();
 
