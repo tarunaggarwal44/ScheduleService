@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Formatting.Compact;
 using Serilog.Formatting.Json;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,19 @@ namespace ScheduleService
             //                .CreateLogger();
 
 
+            
+
+
+            //Log.Logger = new LoggerConfiguration().MinimumLevel.Error().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
+            //                .Enrich.WithProperty("Version", appVersion)
+            //                .WriteTo.File(new JsonFormatter(), "log.txt", rollingInterval: RollingInterval.Day)
+            //                .CreateLogger();
+
 
             Log.Logger = new LoggerConfiguration().MinimumLevel.Error().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
-                            .Enrich.WithProperty("Version", appVersion)
-                             .WriteTo.Debug(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
-    .CreateLogger();
+                         .Enrich.WithProperty("Version", appVersion)
+                         .WriteTo.Console(new RenderedCompactJsonFormatter())
+                         .CreateLogger();
 
             //        Log.Logger = new LoggerConfiguration()
             //.WriteTo.Console()
