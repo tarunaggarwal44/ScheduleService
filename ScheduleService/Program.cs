@@ -25,22 +25,34 @@ namespace ScheduleService
         {
             string appVersion = "1.0.0";
 
-            Log.Logger = new LoggerConfiguration().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Error().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
                             .Enrich.WithProperty("Version", appVersion)
                             .WriteTo.File(new JsonFormatter(), "log.txt", rollingInterval: RollingInterval.Day)
                             .CreateLogger();
+
+
+
+            //        Log.Logger = new LoggerConfiguration().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
+            //                        .Enrich.WithProperty("Version", appVersion)
+            //                         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+            //.CreateLogger();
+
+            //        Log.Logger = new LoggerConfiguration()
+            //.WriteTo.Console()
+            //.CreateLogger();
+
             try
             {
-                Log.Debug("Starting Payment Safe web host");
+               // Log.Debug("Starting Payment Safe web host");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Host terminated unexpectedly");
+                //Log.Fatal(ex, "Host terminated unexpectedly");
             }
             finally
             {
-                Log.CloseAndFlush();
+                //Log.CloseAndFlush();
             }
         }
 
