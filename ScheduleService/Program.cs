@@ -34,7 +34,7 @@ namespace ScheduleService
 
             Log.Logger = new LoggerConfiguration().MinimumLevel.Error().Destructure.UsingAttributes().ReadFrom.Configuration(Configuration)
                             .Enrich.WithProperty("Version", appVersion)
-                             .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
+                             .WriteTo.Debug(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
 
             //        Log.Logger = new LoggerConfiguration()
